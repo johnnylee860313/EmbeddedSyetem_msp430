@@ -1,8 +1,10 @@
 /*
  * SMCLK_DCO_2.c
  *
- *  Created on: 2024¦~10¤ë1¤é
- *      Author: user
+ *  Created on: 2024/10/1
+ *      Author: Johnny Lee
+ *  While keeping the green LED flashing at 1 Hz, 
+ *  pushing the button turns on the red LED and releasing the button turns off the red LED.
  */
 
 
@@ -21,7 +23,7 @@ void main(void)
     P1DIR |= GREEN_LED + RED_LED;  // Set P1.6 and P1.0 as output (Green and Red LEDs)
     P1OUT &= ~(GREEN_LED + RED_LED); // Turn off both LEDs initially
     P1DIR &= ~BUTTON;            // Set P1.3 as input (Button)
-    P1REN |= BUTTON;             // Enable pull-up/pull-down resistor on P1.3
+    P1REN |= BUTTON;             // Enable pull-up resistor on P1.3
     P1OUT |= BUTTON;             // Configure P1.3 with a pull-up resistor
 
     // Configure Timer_A
