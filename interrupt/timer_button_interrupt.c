@@ -62,6 +62,10 @@ __interrupt void Timer_A(void) {
 }
 
 // Port 1 Interrupt Service Routine for the button
+/* The PORT1_VECTOR interrupt in the MSP430 is associated with all interrupts from Port 1. 
+** This means that any interrupt triggered by a change in the state of any input pin on Port 1 (e.g., P1.0, P1.1, ..., P1.7) 
+** will use the same PORT1_VECTOR.
+*/
 #pragma vector = PORT1_VECTOR
 __interrupt void Port_1(void) {
     if (P1IFG & BIT3) {        // Check if the interrupt was caused by P1.3 (Button)

@@ -12,8 +12,8 @@ void ConfigWDT(void) {
 
 // Configurations for the clocks
 void ConfigClocks(void) {
-    BCSCTL3 |= LFXT1S_2;       // Set VLO as the source
-    BCSCTL2 |= SELS;           // Set SMCLK source as VLO (~ 12kHz)
+    BCSCTL3 |= LFXT1S_2;       // Enable VLO as MCLK/ACLK src
+    BCSCTL2 |= SELS;           // Set SMCLK as clock (VLO ~= 12kHz)
 }
 
 // Configurations for the LEDs
