@@ -7,7 +7,7 @@ And there are some stepsto follow :
 1. Close watchdog timer
 2. Set DCO as src of MCLK, 1 MHz, and VLO as ACLK
 3. Setup both LED lights and set it initially off
-4. You can modify the sample code 2 to finish the basic, you can first set timer_A source from MCLK(DCO) to settle 30 micro second delay, and then set timer_A source from ACLK(VLO).
+4. First set timer_A source from MCLK(DCO) to settle 30 micro second delay, and then set timer_A source from ACLK(VLO).
 5. Set ADC configuration into: 
 5.1 Sample-and-hold source from timer_A
 5.2 Temperature sensor channel
