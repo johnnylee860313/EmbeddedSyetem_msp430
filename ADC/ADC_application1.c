@@ -1,5 +1,7 @@
 /*
-Measure the temperature of MSP430 every second using the temperature sensor inside ADC10. Flash the red LED if the temperature rises and the green LED if it drops. Flash both LEDs if the temperature remains unchanged between two consecutive measurements.
+Measure the temperature of MSP430 every second using the temperature sensor inside ADC10. 
+Flash the red LED if the temperature rises and the green LED if it drops. 
+Flash both LEDs if the temperature remains unchanged between two consecutive measurements.
 The sampling of ADC10 must be triggered continuously by Timer_A.
 You can use an infinite loop to flash the LEDs.
 
