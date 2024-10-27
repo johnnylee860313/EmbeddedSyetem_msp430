@@ -68,7 +68,7 @@ void ConfigTimerA(void) {
     TACCR0 = 30;
     TACCTL0 |= CCIE;
     TACTL = TASSEL_2 | MC_1 | TACLR; //SMCLK, up mode, smclk clock sourced default is DCO ~= 1MHz , so count up to 30 ~= 30 microsec
-    LPM0;                           // Low Power Mode, wait for settle
+    __bis_SR_register(LPM0_bits + GIE);  // Enter LPM0 with global interrupts enabled
     TACCTL0 &= ~CCIE;
     __disable_interrupt();
 
@@ -77,7 +77,7 @@ void ConfigTimerA(void) {
     TACCR1 = 12000;  // 12 kHz ACLK results in 1-second interval (12000 ticks)
     TACCTL1 |= CCIE;
     TACTL = TASSEL_1 | MC_1 | TACLR;  // Use ACLK (VLO ~12 kHz) as Timer_A source, up mode
-    LPM0;                           // Low Power Mode, wait for settle
+    __bis_SR_register(LPM0_bits + GIE);  // Enter LPM0 with global interrupts enabled
     TACCTL1 &= ~CCIE;
     __disable_interrupt();
 }
@@ -115,6 +115,6 @@ __interrupt void ADC10_ISR(void) {
 
 #pragma vector=TIMERA0_VECTOR
 __interrupt void ta0_isr(void){
-    TACTL = 0;
+    TACTL = ~TAIFG;
     LPM0_EXIT;                        // Exit LPM0 on return
 }
