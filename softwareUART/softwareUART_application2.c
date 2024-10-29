@@ -45,7 +45,7 @@ void configWDT(void) {
 }
 
 void configClocks(void) {
-    BCSCTL1 = CALBC1_1MHZ;    // Set DCO to 1 MHz
+    BCSCTL1 = CALBC1_1MHZ;    // Set DCO to 1 MHz for SMCLK
     DCOCTL = CALDCO_1MHZ;
     BCSCTL3 |= LFXT1S_2;      // Set VLO as the source for ACLK (~12 kHz)
 }

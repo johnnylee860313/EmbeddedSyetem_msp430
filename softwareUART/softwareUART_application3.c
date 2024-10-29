@@ -130,7 +130,20 @@ __interrupt void Timer_A0_ISR(void) {
     __bic_SR_register_on_exit(LPM0_bits); // Wake up main loop
 }
 
-#pragma vector = TIMER0_A1_VECTOR // UART RXD interrupt
+#pragma vector = TIMER0_A1_VECTOR  // TXD interrupt
 __interrupt void Timer_A1_ISR(void) {
-    // UART RX interrupt logic (not needed for this application)
+    static unsigned char txBitCnt = 10;
+    TA0CCR0 += UART_TBIT; // Set TACCR0 for next intrpt
+    if (txBitCnt == 0) {  // All bits TXed?
+        TA0CCTL0 &= ~CCIE;  // Yes, disable intrpt
+        txBitCnt = 10;      // Re-load bit counter
+    } else {
+        if (txData & 0x01) {// Check next bit to TX
+            TA0CCTL0 &= ~OUTMOD2; // TX '1’ by OUTMODE0/OUT
+        } else {
+            TA0CCTL0 |= OUTMOD2; // TX '0‘
+        } 
+        txData >>= 1;
+        txBitCnt--;
+    }
 }
